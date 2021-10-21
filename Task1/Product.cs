@@ -13,7 +13,44 @@ namespace SigmaTask8.Task1
         int expirationDate;
         public string NameOfProduct { get; set; }
         public DateTime CreationDay { get; set; }
-
+        //властивість------
+        public int ExpirationDay
+        {
+            get { return this.expirationDate; }
+            set
+            {
+                if (value >= 0)
+                {
+                    this.expirationDate = value;
+                }
+                else
+                    throw new ArgumentException("Wrong Day");
+            }
+        }
+        //властивість-------------
+        public double PriceOfProduct
+        {
+            get { return this.priceOfProduct; }
+            set
+            {
+                if (value >= 0)
+                    this.priceOfProduct = value;
+                else
+                    throw new ArgumentException("Wrong number");
+            }
+        }
+        //властивість-----------------
+        public double WeightOfProduct
+        {
+            get { return this.weightOfProduct; }
+            set
+            {
+                if (value >= 0)
+                    this.weightOfProduct = value;
+                else
+                    throw new ArgumentException("Wrong number");
+            }
+        }
 
 
         //Конструктори------------------
@@ -163,44 +200,7 @@ namespace SigmaTask8.Task1
                 Console.WriteLine(ex.Message);
             }
         }
-        //властивість------
-        public int ExpirationDay
-        {
-            get { return this.expirationDate; }
-            set
-            {
-                if (value >= 0)
-                {
-                    this.expirationDate = value;
-                }
-                else
-                    throw new ArgumentException("Wrong Day");
-            }
-        }
-        //властивість-------------
-        public double PriceOfProduct
-        {
-            get { return this.priceOfProduct; }
-            set
-            {
-                if (value >= 0)
-                    this.priceOfProduct = value;
-                else
-                    throw new ArgumentException("Wrong number");
-            }
-        }
-        //властивість-----------------
-        public double WeightOfProduct
-        {
-            get { return this.weightOfProduct; }
-            set
-            {
-                if (value >= 0)
-                    this.weightOfProduct = value;
-                else
-                    throw new ArgumentException("Wrong number");
-            }
-        }
+        
 
 
         //фунція рівності-----------
@@ -215,9 +215,8 @@ namespace SigmaTask8.Task1
         public override string ToString()
         {
             string str_date = CreationDay.ToShortDateString();
-            string res = "Name: " + NameOfProduct + "\tPrice: $" + priceOfProduct +
-                "\tWeight: " + weightOfProduct + "kg" + "\nDate of creation " + str_date +
-                "\tExpiration day " + this.ExpirationDay + "\t Class " + this.GetType();
+            string res = string.Format("Name: {0}\tPrice: {1:f2}$\tWeight: {2:f2}kg\nDate of creation: {3}\tExpiration day: {4}",
+                NameOfProduct, PriceOfProduct, WeightOfProduct, str_date, ExpirationDay);
             return res;
         }
         //змінити ціну------------------------
@@ -229,5 +228,8 @@ namespace SigmaTask8.Task1
             this.PriceOfProduct = this.PriceOfProduct +
                 this.PriceOfProduct * d_interest;
         }
+
+        ////тепер хочемо по ціні посортувати
+            //products.Sort(new CompareByPrice());
     }
 }
