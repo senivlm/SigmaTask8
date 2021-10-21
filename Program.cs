@@ -1,4 +1,5 @@
 ﻿using SigmaTask8.Task1;
+using SigmaTask8.Task3;
 using System;
 using System.Collections.Generic;
 
@@ -38,6 +39,15 @@ namespace SigmaTask8
             {
                 Console.WriteLine(item.ToString() + "\n");
             }
+
+
+            string path = @"C:\Users\Acer\OneDrive\Робочий стіл\C#\SigmaTask8\Task3\TextFile.txt";
+            TextCollection colection = new TextCollection(path);
+
+            Console.WriteLine("\nSentences: \n{0}",colection.ToString());
+            //foreach(var text in colection)
+            colection.SortByLenght();
+            Console.WriteLine("\nSentences: \n{0}", colection.ToString());
 
 
             Console.WriteLine("\n\nWrite to end");
