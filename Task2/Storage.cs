@@ -23,6 +23,16 @@ namespace SigmaTask8.Task1
         {
             this.products = new List<Product>(prod_arr);
         }
+
+        //швидка ініціаліція------------
+        public void QuickInit()
+        {
+            products.Add(new Product(new DateTime(2021,3,12),3.21,3.3,"Waterlemon",30));
+            products.Add(new Product(new DateTime(2021,9,28),5,1.3,"Banana",30));
+            products.Add(new Product(new DateTime(2020,5,2),10,0.5,"Nuts",30));
+            products.Add(new Meat(new DateTime(2021,10,20),10,0.5,"NA",30,1,2));
+            products.Add(new DairyProduct(new DateTime(2021,10,2),5,0.5,"Milk",30));
+        }
         //зчитати з консолі------------------------------------
         public void ReadFromConsole()
         {
@@ -140,7 +150,7 @@ namespace SigmaTask8.Task1
             //створюємо об'єкт з отриманих даних і додаємо в масив
             return new Meat(date, price, weight, "N/A", exDay, category, type);
         }
-        private DairyProducts ReadDairy()
+        private DairyProduct ReadDairy()
         {
             string input;
             //загальні поля
@@ -191,7 +201,7 @@ namespace SigmaTask8.Task1
             }
             date = new DateTime(year, month, day);
 
-            return new DairyProducts(date, price, weight, name, exDay);
+            return new DairyProduct(date, price, weight, name, exDay);
         }
         private Product ReadProduct()
         {

@@ -6,14 +6,14 @@ using System.Threading.Tasks;
 
 namespace SigmaTask8.Task1
 {
-    class DairyProducts : Product
+    class DairyProduct : Product
     {
         //з днями придатності
 
-        public DairyProducts()
+        public DairyProduct()
         : this(new DateTime(2020, 1, 1), 0, 0, "N/A", 0) { }
 
-        public DairyProducts(DateTime time, double price = 0, double weight = 0,
+        public DairyProduct(DateTime time, double price = 0, double weight = 0,
             string name = "N/A", int exDay = 0) : base(time, price, weight, name, exDay = 0)
         {
         }
@@ -22,7 +22,7 @@ namespace SigmaTask8.Task1
         {
             if (obj.GetType() != this.GetType()) return false;
 
-            var other = obj as DairyProducts;
+            var other = obj as DairyProduct;
             return ((this.NameOfProduct == other.NameOfProduct) && (this.ExpirationDay == other.ExpirationDay));
         }
         //ToString
