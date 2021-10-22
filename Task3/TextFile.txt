@@ -1,12 +1,12 @@
 ﻿1Air pollution is contamination of the indoor or outdoor environment by any chemical, physical 
-or biological agent. 2Household combustion devices, motor vehicles, industrial facilities and 
+or biological agent. 2Hou(sehold combustion devices, motor vehicles, industrial fac)ilities and 
 forest fires are common sources of air pollution. 3Pollutants of major 
 public health concern. 4Outdoor and indoor air pollution 
-cause respiratory and other diseases and is an important source of morbidity and mortality.
+cause respiratory and other diseases (and) is an ((important)) source of morbidity and mortality.
 
-5Air pollution kills an estimated seven million people worldwide every year.
-6WHO data shows that almost all of the global population (99%) breathe air that exceeds WHO guideline 
-limits. 7WHO is supporting countries to address air pollution.
+5Air pollu(tion kills an estimated seven million people worl)dwide every year.
+6WHO data shows(((indeed))) that almost all of the global population (99%) breathe air that exceeds WHO guideline 
+limits. 7WHO is supporting countries to addr(ess air polluti)on.
 
 8From smog hanging over cities to smoke inside the home, air pollution poses a major threat to health 
 and climate.

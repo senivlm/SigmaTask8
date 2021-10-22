@@ -19,39 +19,37 @@ namespace SigmaTask8.Task3
 
         public void ReadFromFile(string path)
         {
-            if(File.Exists(path))
+            if (File.Exists(path))
             {
                 using (StreamReader reader = new StreamReader(path))
                 {
                     //зчитаи всі речення (в кінці речення є крапка)
                     //і не обов'язково, щоб 1 речення було строго в 1 рядку
                     //P.S дивитись вхідний текстовий файл
-                    string line;
 
-                    int k = 1;
-                    while((line = reader.ReadLine())!=null)
+
+                    //відповідає за попередній розмір списку речень
+                    //необхідний, щоб визначати, чи почалось нове речення
+                    int lastCount = 0;
+
+                    string line;
+                    while ((line = reader.ReadLine()) != null)
                     {
-                        //якщо є у рядку крапка
+                        //якщо є у рядку є крапка
                         if (line.Contains('.'))
                         {
                             //розділити по крапках
-                            string[] lineSplit = line.Split('.',StringSplitOptions.RemoveEmptyEntries);
-                            //тестовий вивід=============
-                            Console.WriteLine("\nline \n{0}", k);
-                            for (int i = 0; i < lineSplit.Length; i++)
-                            {
-                                Console.WriteLine("Split {0} is {1}", i + 1, lineSplit[i].Length);
-                            }
-                            //====================
+                            string[] lineSplit = line.Split('.', StringSplitOptions.RemoveEmptyEntries);
 
                             //якщо список був пустий
-                            if(sentences.Count==0)
+                            if (sentences.Count == 0)
                             {
                                 //просто додаємо
-                                foreach(var text in lineSplit)
+                                foreach (var text in lineSplit)
                                 {
                                     sentences.Add(text);
-                                }    
+                                    lastCount++;
+                                }
                             }
                             //якщо список вже мав записи, отже може бути
                             //продовженя речення
@@ -60,20 +58,20 @@ namespace SigmaTask8.Task3
                             //інакше продовження старого
                             else
                             {
-                                foreach (var text in lineSplit)
+                                foreach (string text in lineSplit)
                                 {
                                     int index = 0;
                                     //якщо якась з частин пуста, то пропустити
                                     if (text.Length == 0)
                                         continue;
                                     //шукаємо першу букву, а не символ
-                                    while(!Char.IsLetter(text[index]))
+                                    while (!Char.IsLetter(text[index]))
                                     {
                                         index++;
                                     }
                                     //перевіряємо, яка вона є
                                     //якщо велика, це нове речення
-                                    if(Char.IsUpper(text[index]))
+                                    if (Char.IsUpper(text[index]))
                                     {
                                         sentences.Add(text);
                                     }
@@ -83,24 +81,34 @@ namespace SigmaTask8.Task3
                                         sentences[sentences.Count - 1] += text;
                                     }
                                 }
-
                             }
                         }
                         //якщо список пустий це початкова частинка якогось речення
-                        else if(sentences.Count==0)
+                        else if (sentences.Count == 0)
                         {
                             sentences.Add(line);
+                            lastCount++;
                         }
-                        //інакше рядок - продовження існуючого речення або новий абзац
+                        //інакше рядок - продовження існуючого речення або нове речення
                         else
                         {
-                            sentences[sentences.Count - 1] += line;
+                            //значить було нове речення, а залишок - це початок нового речення
+                            if (lastCount < sentences.Count)
+                            {
+                                sentences.Add(line);
+                                lastCount = sentences.Count;
+                            }
+                            //інакше продовження існуючого речення
+                            else
+                            {
+                                sentences[sentences.Count - 1] += line;
+                            }
                         }
-
-                        k++;
                     }
                 }
             }
+            else
+                throw new FileNotFoundException("Can`t find file");
         }
 
         //посортувати по довжині у зростання
@@ -108,9 +116,27 @@ namespace SigmaTask8.Task3
         {
             sentences.Sort((x1,x2)=>x1.Length.CompareTo(x2.Length));
         }
+        //глибина - це кількість вкладених дужок
         public string GetGreatestDepth()
         {
             string res = "";
+
+            int general_max = 0;
+
+            foreach(string sentence in sentences)
+            {
+                int curr_max = 0;
+                for (int i =0; i < sentence.Length;i++)
+                {
+                    if(sentence[i]=='(')
+                    {
+                        curr_max ++;
+
+                        if()
+                    }
+                }
+            }
+
             return res;
         }
 
