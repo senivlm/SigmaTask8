@@ -49,6 +49,7 @@ namespace SigmaTask8
             colection.SortByLenght();
             Console.WriteLine("\nSentences: \n{0}", colection.ToString());
 
+            Console.WriteLine("Deppest lenght is\n{0}",colection.GetGreatestDepth());
 
             Console.WriteLine("\n\nWrite to end");
             Console.ReadLine();

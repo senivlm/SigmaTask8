@@ -121,22 +121,30 @@ namespace SigmaTask8.Task3
         {
             string res = "";
 
-            int general_max = 0;
+            int max = 0;
 
             foreach(string sentence in sentences)
             {
-                int curr_max = 0;
+                int curr_count = 0;
                 for (int i =0; i < sentence.Length;i++)
                 {
-                    if(sentence[i]=='(')
+                    if (sentence[i] == '(')
                     {
-                        curr_max ++;
+                        curr_count++;
 
-                        if()
+                        if (curr_count > max)
+                        {
+                            max = curr_count;
+                            res = sentence;
+                        }
                     }
+                    else if (sentence[i] == ')')
+                        curr_count--;
                 }
+                //десь пмилка з дужками у реченні
+                if (curr_count != 0)
+                    throw new InvalidDataException("Sentence has error");
             }
-
             return res;
         }
 
