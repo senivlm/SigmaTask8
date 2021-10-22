@@ -20,22 +20,22 @@ namespace SigmaTask8
                 list.Add(new Product(new DateTime(2021,10,i),price,weight,name,30));
             }
             //перетвор.ємо в масив
-            Product[] arr = list.ToArray();
+            Product[] prod_arr = list.ToArray();
             //сортуємо по ціні
-            SortClass.Sort(arr, new CompareProductByPrice().Compare);
+            SortClass.Sort(prod_arr, new CompareProductByPrice().Compare);
             //виводимо
             Console.WriteLine("Sorted by price : \n");
-            foreach(var item in arr)
+            foreach(var item in prod_arr)
             {
                 Console.WriteLine(item.ToString()+"\n");
             } 
 
 
             //сортуємо по вазі
-            SortClass.Sort(arr, new CompareProductByWeight().Compare);
+            SortClass.Sort(prod_arr, new CompareProductByWeight().Compare);
             //виводимо
             Console.WriteLine("Sorted by weight : \n");
-            foreach (var item in arr)
+            foreach (var item in prod_arr)
             {
                 Console.WriteLine(item.ToString() + "\n");
             }
@@ -50,6 +50,13 @@ namespace SigmaTask8
             Console.WriteLine("\nSentences: \n{0}", colection.ToString());
 
             Console.WriteLine("Deppest lenght is\n{0}",colection.GetGreatestDepth());
+
+            Console.WriteLine("Task 2 ======\n");
+            Storage stor1 = new Storage(prod_arr);
+            foreach(var prod in stor1)
+            {
+                Console.WriteLine(prod.ToString());
+            }
 
             Console.WriteLine("\n\nWrite to end");
             Console.ReadLine();

@@ -229,7 +229,5 @@ namespace SigmaTask8.Task1
                 this.PriceOfProduct * d_interest;
         }
 
-        ////тепер хочемо по ціні посортувати
-            //products.Sort(new CompareByPrice());
     }
 }
