@@ -12,6 +12,7 @@ namespace SigmaTask8
         {
             //завдання 1 ---------------------
             //створюємо лист продуктів
+            Console.WriteLine("Task 1============\n");
             List<Product> list = new List<Product>();
             Random random = new Random();
             for(int i =1; i < 6; i++)
@@ -43,7 +44,7 @@ namespace SigmaTask8
             }
 
             //завдання 2 ----------------------------
-            Console.WriteLine("Task 2 ======\n");
+            Console.WriteLine("\nTask 2 ======\n");
             Storage stor1 = new Storage();
             stor1.InitByArray(prod_arr);
             Storage stor2 = new Storage();
@@ -62,22 +63,22 @@ namespace SigmaTask8
                 Console.WriteLine(prod.ToString());
             }
             //різні-----------
-            Console.WriteLine("\nUnique---");
-            SortedSet<Product> test2 = StorageFunctions.GetAllUniqueProducts(stor1,stor2);
+            Console.WriteLine("\nAll Unique---");
+            List<Product> test2 = StorageFunctions.GetAllUniqueProducts(stor1,stor2);
             foreach (var prod in test2)
             {
                 Console.WriteLine(prod.ToString());
             }
             //є в 1-му нема в 2-гому---
             Console.WriteLine("\nIn 1-st not in 2-nd---");
-            List<Product> test3 = StorageFunctions.GetProductsInFirstStore(stor1,stor2);
+            List<Product> test3 = StorageFunctions.GetUniqueProductsInFirstStore(stor1,stor2);
             foreach (var prod in test3)
             {
                 Console.WriteLine(prod.ToString());
             }
 
             //завдання 3 --------------------
-            Console.WriteLine("Task 3 ======\n");
+            Console.WriteLine("\nTask 3 ======");
             string path = @"C:\Users\Acer\OneDrive\Робочий стіл\C#\SigmaTask8\Task3\TextFile.txt";
             TextCollection colection = new TextCollection();
             colection.ReadFromFile(path);

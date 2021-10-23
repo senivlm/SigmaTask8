@@ -19,33 +19,34 @@ namespace SigmaTask8.Task2
             return st1.Products.Where((prodFromSt1) => st2.Products.Contains(prodFromSt1)).ToList();
         }
         //всі різні продукти з двох сховищ--------------------
-        public static SortedSet<Product> GetAllUniqueProducts(Storage st1, Storage st2)
+        public static List<Product> GetAllUniqueProducts(Storage st1, Storage st2)
         {
             if (st1 == null || st2 == null)
                 throw new ArgumentNullException("Storage is null");
 
-            //Set не позволить продуктам повторитись
-            //однакові продукти - це ті, що мають однакове ім'я
-            SortedSet<Product> uniqueProducts = new SortedSet<Product>(new CompareProductByName());
-            //проходимось по кожному сховищу і додаємо
-            foreach(var prod in st1)
-            {
-                uniqueProducts.Add(prod);
-            }
-            foreach (var prod in st2)
-            {
-                uniqueProducts.Add(prod);
-            }
-            return uniqueProducts;
+            //отримуємо всі унікальні тільи з першого 
+            List<Product> allUnique = GetUniqueProductsInFirstStore(st1,st2);
+            //додаємо всі унікальні тільки з другого
+            allUnique.AddRange(GetUniqueProductsInSecondStore(st1,st2));
+            return allUnique;
         }
-        //Знайти всі товари, які є в першому складі,яких немає в 2 складі-----------------
-        public static List<Product> GetProductsInFirstStore(Storage st1, Storage st2)
+        //Знайти всі товари, які є в I складі,яких немає в II складі-----------------
+        public static List<Product> GetUniqueProductsInFirstStore(Storage st1, Storage st2)
         {
             if (st1 == null || st2 == null)
                 throw new ArgumentNullException("Storage is null");
 
             //те саме, але при оберненій дії
             return st1.Products.Where((prodFromSt1) => !(st2.Products.Contains(prodFromSt1))).ToList();
+        }
+        //Знайти всі товари, які є в II складі,яких немає в I складі-----------------
+        public static List<Product> GetUniqueProductsInSecondStore(Storage st1, Storage st2)
+        {
+            if (st1 == null || st2 == null)
+                throw new ArgumentNullException("Storage is null");
+
+            //st1 i st2 поміяли місцями
+            return st2.Products.Where((prodFromSt2) => !(st1.Products.Contains(prodFromSt2))).ToList();
         }
 
     }
