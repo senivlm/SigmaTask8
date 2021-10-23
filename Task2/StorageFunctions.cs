@@ -38,14 +38,14 @@ namespace SigmaTask8.Task2
             }
             return uniqueProducts;
         }
-        //Знайти всі товари, які є в першому складі,  яких немає в 2 складі-----------------
+        //Знайти всі товари, які є в першому складі,яких немає в 2 складі-----------------
         public static List<Product> GetProductsInFirstStore(Storage st1, Storage st2)
         {
             if (st1 == null || st2 == null)
                 throw new ArgumentNullException("Storage is null");
-            
 
-            return new List<Product>();
+            //те саме, але при оберненій дії
+            return st1.Products.Where((prodFromSt1) => !(st2.Products.Contains(prodFromSt1))).ToList();
         }
 
     }

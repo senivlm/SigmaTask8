@@ -50,17 +50,28 @@ namespace SigmaTask8
             stor2.QuickInit();
             Storage stor3 = new Storage();
             stor3.QuickInit();
+            stor2.Products.Add(new Product(new DateTime(2021,3,3), 3, 5, "Soda", 30));
+            stor2.Products.Add(new Product(new DateTime(2021,3,3), 3, 5, "Cola", 30));
+            stor1.Products.Add(new Product(new DateTime(2021,3,3), 3, 5, "Soda", 30));
 
-            Console.WriteLine("Similar---");
+            //однакові-----
+            Console.WriteLine("\nSimilar---");
             List<Product> test1 = StorageFunctions.GetSimilarProducts(stor2,stor3);
-            Console.WriteLine(test1.Count);
             foreach(var prod in test1)
             {
                 Console.WriteLine(prod.ToString());
             }
-            Console.WriteLine("Unique---");
+            //різні-----------
+            Console.WriteLine("\nUnique---");
             SortedSet<Product> test2 = StorageFunctions.GetAllUniqueProducts(stor1,stor2);
             foreach (var prod in test2)
+            {
+                Console.WriteLine(prod.ToString());
+            }
+            //є в 1-му нема в 2-гому---
+            Console.WriteLine("\nIn 1-st not in 2-nd---");
+            List<Product> test3 = StorageFunctions.GetProductsInFirstStore(stor1,stor2);
+            foreach (var prod in test3)
             {
                 Console.WriteLine(prod.ToString());
             }
