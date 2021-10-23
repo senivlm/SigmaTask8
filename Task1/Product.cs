@@ -200,8 +200,6 @@ namespace SigmaTask8.Task1
                 Console.WriteLine(ex.Message);
             }
         }
-        
-
 
         //фунція рівності-----------
         public override bool Equals(object obj)

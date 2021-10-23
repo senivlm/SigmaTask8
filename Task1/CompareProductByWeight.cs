@@ -5,11 +5,13 @@ using System.Text;
 
 namespace SigmaTask8.Task1
 {
-    class CompareProductByWeight: IComparer<Product>
+    class CompareProductByWeight: IComparer<Object>
     {
-        public int Compare([AllowNull] Product x, [AllowNull] Product y)
+        public int Compare([AllowNull] Object x, [AllowNull] Object y)
         {
-            return x.WeightOfProduct.CompareTo(y.WeightOfProduct);
+            Product p1 = x as Product;
+            Product p2 = y as Product;
+            return p1.WeightOfProduct.CompareTo(p2.WeightOfProduct);
         }
     }
 }

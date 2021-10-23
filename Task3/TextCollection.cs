@@ -11,104 +11,113 @@ namespace SigmaTask8.Task3
         //скільки буде речень
         List<string> sentences;
 
-        public TextCollection(string path="N/A")
+        public TextCollection()
         {
             sentences = new List<string>();
-            ReadFromFile(path);
         }
 
         public void ReadFromFile(string path)
         {
-            if (File.Exists(path))
+            try
             {
-                using (StreamReader reader = new StreamReader(path))
+                if (File.Exists(path))
                 {
-                    //зчитаи всі речення (в кінці речення є крапка)
-                    //і не обов'язково, щоб 1 речення було строго в 1 рядку
-                    //P.S дивитись вхідний текстовий файл
-
-
-                    //відповідає за попередній розмір списку речень
-                    //необхідний, щоб визначати, чи почалось нове речення
-                    int lastCount = 0;
-
-                    string line;
-                    while ((line = reader.ReadLine()) != null)
+                    using (StreamReader reader = new StreamReader(path))
                     {
-                        //якщо є у рядку є крапка
-                        if (line.Contains('.'))
+                        //зчитаи всі речення (в кінці речення є крапка)
+                        //і не обов'язково, щоб 1 речення було строго в 1 рядку
+                        //P.S дивитись вхідний текстовий файл
+
+
+                        //відповідає за попередній розмір списку речень
+                        //необхідний, щоб визначати, чи почалось нове речення
+                        int lastCount = 0;
+                        string line;
+                        while ((line = reader.ReadLine()) != null)
                         {
-                            //розділити по крапках
-                            string[] lineSplit = line.Split('.', StringSplitOptions.RemoveEmptyEntries);
-
-                            //якщо список був пустий
-                            if (sentences.Count == 0)
+                            //якщо є у рядку є крапка
+                            if (line.Contains('.'))
                             {
-                                //просто додаємо
-                                foreach (var text in lineSplit)
-                                {
-                                    sentences.Add(text);
-                                    lastCount++;
-                                }
-                            }
-                            //якщо список вже мав записи, отже може бути
-                            //продовженя речення
+                                //розділити по крапках
+                                string[] lineSplit = line.Split('.', StringSplitOptions.RemoveEmptyEntries);
 
-                            //якщо це початок нового речення, то перша буква велика
-                            //інакше продовження старого
-                            else
-                            {
-                                foreach (string text in lineSplit)
+                                //якщо список був пустий
+                                if (sentences.Count == 0)
                                 {
-                                    int index = 0;
-                                    //якщо якась з частин пуста, то пропустити
-                                    if (text.Length == 0)
-                                        continue;
-                                    //шукаємо першу букву, а не символ
-                                    while (!Char.IsLetter(text[index]))
-                                    {
-                                        index++;
-                                    }
-                                    //перевіряємо, яка вона є
-                                    //якщо велика, це нове речення
-                                    if (Char.IsUpper(text[index]))
+                                    //просто додаємо
+                                    foreach (var text in lineSplit)
                                     {
                                         sentences.Add(text);
+                                        lastCount++;
                                     }
-                                    //інакше це продовження старого
-                                    else
+                                }
+                                //якщо список вже мав записи, отже може бути
+                                //продовженя речення
+
+                                //якщо це початок нового речення, то перша буква велика
+                                //інакше продовження старого
+                                else
+                                {
+                                    foreach (string text in lineSplit)
                                     {
-                                        sentences[sentences.Count - 1] += text;
+                                        int index = 0;
+                                        //якщо якась з частин пуста, то пропустити
+                                        if (text.Length == 0)
+                                            continue;
+                                        //шукаємо першу букву, а не символ
+                                        while (!Char.IsLetter(text[index]))
+                                        {
+                                            index++;
+                                        }
+                                        //перевіряємо, яка вона є
+                                        //якщо велика, це нове речення
+                                        if (Char.IsUpper(text[index]))
+                                        {
+                                            sentences.Add(text);
+                                        }
+                                        //інакше це продовження старого
+                                        else
+                                        {
+                                            sentences[sentences.Count - 1] += text;
+                                        }
                                     }
                                 }
                             }
-                        }
-                        //якщо список пустий це початкова частинка якогось речення
-                        else if (sentences.Count == 0)
-                        {
-                            sentences.Add(line);
-                            lastCount++;
-                        }
-                        //інакше рядок - продовження існуючого речення або нове речення
-                        else
-                        {
-                            //значить було нове речення, а залишок - це початок нового речення
-                            if (lastCount < sentences.Count)
+                            //якщо список пустий це початкова частинка якогось речення
+                            else if (sentences.Count == 0)
                             {
                                 sentences.Add(line);
-                                lastCount = sentences.Count;
+                                lastCount++;
                             }
-                            //інакше продовження існуючого речення
+                            //інакше рядок - продовження існуючого речення або нове речення
                             else
                             {
-                                sentences[sentences.Count - 1] += line;
+                                //значить було нове речення, а залишок - це початок нового речення
+                                if (lastCount < sentences.Count)
+                                {
+                                    sentences.Add(line);
+                                    lastCount = sentences.Count;
+                                }
+                                //інакше продовження існуючого речення
+                                else
+                                {
+                                    sentences[sentences.Count - 1] += line;
+                                }
                             }
                         }
                     }
                 }
+                else
+                    throw new FileNotFoundException("Can`t find file");
             }
-            else
-                throw new FileNotFoundException("Can`t find file");
+            catch (FileNotFoundException ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            catch (IndexOutOfRangeException ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
         }
 
         //посортувати по довжині у зростання
@@ -176,8 +185,6 @@ namespace SigmaTask8.Task3
 
             }
         }
-
-        
 
         public override string ToString()
         {

@@ -11,6 +11,8 @@ namespace SigmaTask8.Task1
     class Storage
     {
         List<Product> products;
+        //властивість
+        public List<Product> Products => products;
 
         //конструктор--------------------------
         public Storage()
@@ -49,10 +51,9 @@ namespace SigmaTask8.Task1
                 Console.WriteLine("Wrong input");
                 input = Console.ReadLine();
             }
-            products = new List<Product>(sizeOfArr);
-
-            int counter = 0;
-            while (counter < sizeOfArr)
+            //оновлюємо розмір масиву
+            products.Clear();
+            for (int counter = 0; counter < sizeOfArr;counter++)
             {
                 //вибираємо варіант product
                 Console.WriteLine("Choose variety: 1->Meat\t 2->Dairy Product\t 3->Product");
@@ -65,19 +66,18 @@ namespace SigmaTask8.Task1
                 if (variety == 1)
                 {
                     //створюємо об'єкт з отриманих даних і додаємо в масив
-                    products[counter] = ReadMeat();
+                    products.Add(ReadMeat());
                 }
                 //молочні
                 else if (variety == 2)
                 {
-                    products[counter] = ReadDairy();
+                    products.Add(ReadDairy());
                 }
                 //звичайний
                 else
                 {
-                    products[counter] = ReadProduct();
+                    products.Add(ReadProduct());
                 }
-                counter++;
             }
         }
         
@@ -269,7 +269,7 @@ namespace SigmaTask8.Task1
                         throw new ArgumentException("Wrong Rows input");
                     }
                     //оновлюємо розмір масиву
-                    this.products = new List<Product>(rows);
+                    products.Clear();
 
                     //зчитуємо поки не буде кінця файлу
                     for (int i = 0; i < rows; i++)
@@ -281,13 +281,13 @@ namespace SigmaTask8.Task1
                         //Product і DairyProduct однакові, у обох є термін придатності
                         if (elements == 5)
                         {
-                            products[i] = new Product();
+                            products.Add(new Product());
                             products[i].Parse(line);
                         }
                         //якщо 6 елем, то це класс Meat
                         else if (elements == 6)
                         {
-                            products[i] = new Meat();
+                            products.Add(new Product());
                             products[i].Parse(line);
                         }
                         else
@@ -303,7 +303,7 @@ namespace SigmaTask8.Task1
             }
         }
 
-        //перевіряє дати пригодністі всіх елементів у storage
+        //перевіряє дати пригодністі всіх елементів у storage-------------
         public void CheckExpirationDate(string pathToWrite)
         {
             //зберігає індекси, що треба знищити
@@ -398,13 +398,14 @@ namespace SigmaTask8.Task1
                 item.ChangePrice(interest);
             }
         }
-        //енумератор
+        //енумератор-------------------
         public IEnumerator<Product> GetEnumerator()
         {
             return new StorageEnumerator(products);
         }
 
     }
+    //Клас Енумератор для Storage--------
     class StorageEnumerator: IEnumerator<Product>
     {
         List<Product> products;

@@ -4,7 +4,7 @@ using System.Text;
 
 namespace SigmaTask8.Task1
 {
-    delegate int SortDelegate(Product p1, Product p2);
+    delegate int SortDelegate(Object obj1, Object obj2);
     static class SortClass
     {
         public static void Sort(Product[] prod_arr, SortDelegate deleg )
