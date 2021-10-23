@@ -1,4 +1,5 @@
 ﻿using SigmaTask8.Task1;
+using SigmaTask8.Task2;
 using SigmaTask8.Task3;
 using System;
 using System.Collections.Generic;
@@ -45,12 +46,27 @@ namespace SigmaTask8
             Console.WriteLine("Task 2 ======\n");
             Storage stor1 = new Storage();
             stor1.InitByArray(prod_arr);
-            foreach (var prod in stor1)
+            Storage stor2 = new Storage();
+            stor2.QuickInit();
+            Storage stor3 = new Storage();
+            stor3.QuickInit();
+
+            Console.WriteLine("Similar---");
+            List<Product> test1 = StorageFunctions.GetSimilarProducts(stor2,stor3);
+            Console.WriteLine(test1.Count);
+            foreach(var prod in test1)
+            {
+                Console.WriteLine(prod.ToString());
+            }
+            Console.WriteLine("Unique---");
+            SortedSet<Product> test2 = StorageFunctions.GetAllUniqueProducts(stor1,stor2);
+            foreach (var prod in test2)
             {
                 Console.WriteLine(prod.ToString());
             }
 
             //завдання 3 --------------------
+            Console.WriteLine("Task 3 ======\n");
             string path = @"C:\Users\Acer\OneDrive\Робочий стіл\C#\SigmaTask8\Task3\TextFile.txt";
             TextCollection colection = new TextCollection();
             colection.ReadFromFile(path);

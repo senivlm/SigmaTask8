@@ -226,6 +226,5 @@ namespace SigmaTask8.Task1
             this.PriceOfProduct = this.PriceOfProduct +
                 this.PriceOfProduct * d_interest;
         }
-
     }
 }
