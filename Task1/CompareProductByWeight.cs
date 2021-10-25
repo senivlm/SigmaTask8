@@ -4,7 +4,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.Text;
 
 namespace SigmaTask8.Task1
-{
+{Можна компаратори використати анонімні з лямбдами
     class CompareProductByWeight: IComparer<Object>
     {
         public int Compare([AllowNull] Object x, [AllowNull] Object y)
