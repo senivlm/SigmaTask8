@@ -202,7 +202,7 @@ namespace SigmaTask8.Task1
             date = new DateTime(year, month, day);
 
             return new DairyProduct(date, price, weight, name, exDay);
-        }
+        }Це неправильно мати різні методи для зчитування об'єктів дочірніх класів
         private Product ReadProduct()
         {
             string input;
