@@ -15,7 +15,7 @@ namespace SigmaTask8.Task3
         {
             sentences = new List<string>();
         }
-
+Ви все заклади в один метод. Це не ООП!!!!!
         public void ReadFromFile(string path)
         {
             try
